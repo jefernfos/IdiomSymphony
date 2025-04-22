@@ -1,0 +1,2 @@
+https://some-random-api.com/lyrics?title=idfc
+https://j00tube.com/api/v1/search?q=idfc+blackbear

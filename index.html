@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/play.svg" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js"></script>
+    <title>IdiomSymphony</title>
+</head>
+<body>
+    <header>
+        <div class="selection">
+            <div class="songSelection">
+                <input id="song" type="text" placeholder="Enter a song...">
+                <button onclick="displaySong()">Search</button>
+            </div>
+            <div class="langSelection">
+                <span>Source:</span>
+                <select id="sourceLang">
+                    <option value="auto">Auto Detect</option>
+                    <!-- language options -->
+                </select>
+                <span>Target:</span>
+                <select id="targetLang">
+                    <option value="auto">Auto Detect</option>
+                    <!-- language options -->
+                </select>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="lyrics">
+            <h1 id="title">IdiomSymphony</h1>
+            <h2 id="author">Learn new languages with music!</h2>
+            <div id="lyrics">Instructions:<br>(to add)</div>
+        </div>
+    </main>
+    <footer>
+        <div class="player">
+            <script src="js/player.js"></script>
+            <button id="play">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9l0 176c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z"/></svg>
+            </button>
+            <div id="youtube_player" style="display:none;"></div>
+        </div>
+    </footer>
+</body>
+</html>

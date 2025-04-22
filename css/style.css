@@ -1,0 +1,86 @@
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/Inter-Regular.woff2") format("woff2"); }
+
+/* Geral Style */
+
+body, input, button, select {
+    font-family: Inter, sans-serif;
+}
+
+body {
+    background-color: #f7f7f7;
+    font-size: 1em;
+}
+
+h1 {
+    font-size: 2.618em;
+}
+
+h2 {
+    font-size: 1.618em;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Selection Style */
+
+.selection {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.songSelection {
+    padding-left: 2px;
+}
+
+.langSelection {
+    padding-right: 2px;
+}
+
+/* Lyrics Style */
+
+.lyrics {
+    padding-top: 1em;
+    text-align: center;
+    margin-bottom: 120px;
+    color: #070f0f;
+}
+
+#lyrics {
+    white-space: pre-wrap;
+}
+
+/* Player Style */
+
+.player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px 0;
+    text-align: center;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.player button {
+    background-color: transparent;
+    border-style: none;
+}
+
+.player svg {
+    width: 48px;
+    fill: #ffffff;
+    transition: 0.25s;
+}
+
+.player svg:hover {
+    filter: drop-shadow(0 0 3px #7f7f7f);
+}
