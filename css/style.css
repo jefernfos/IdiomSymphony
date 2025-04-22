@@ -53,8 +53,24 @@ a {
     color: #070f0f;
 }
 
-#lyrics {
-    white-space: pre-wrap;
+.lyrics p {
+    margin: 0;
+    padding: 0;
+}
+
+.lyrics .original {
+    margin-bottom: 0.2em;
+}
+
+.lyrics .translation {
+    margin-bottom: 1em;
+    color: #5f5757;
+}
+
+.lyrics br {
+    display: block;
+    content: "";
+    margin-top: 3em;
 }
 
 /* Player Style */
