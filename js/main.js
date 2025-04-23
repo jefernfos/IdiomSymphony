@@ -1,6 +1,10 @@
-async function translate(text, from = 'auto', to = 'pt-BR') {
+async function translate(text, fromLang = 'auto', toLang = 'auto') {
+    if (toLang === 'auto') {
+        toLang = navigator.language;
+    }
+
     const query = encodeURIComponent(text);
-    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from}&tl=${to}&dt=t&q=${query}`;
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${fromLang}&tl=${toLang}&dt=t&q=${query}`;
 
     try {
         const response = await fetch(url);
@@ -46,6 +50,9 @@ async function displaySongInfo() {
     const author = document.getElementById("author");
     const lyrics = document.getElementById("lyrics");
 
+    const fromLang = document.getElementById("fromLang").value;
+    const toLang = document.getElementById("toLang").value;
+
     lyrics.textContent = "";
 
     const data = await searchSongInfo();
@@ -75,7 +82,7 @@ async function displaySongInfo() {
         lyrics.appendChild(originalLine);
 
         try {
-            const translation = await translate(line);
+            const translation = await translate(line, fromLang, toLang);
             const translatedLine = document.createElement("p");
             translatedLine.textContent = translation;
             translatedLine.classList.add("translation");
@@ -83,5 +90,29 @@ async function displaySongInfo() {
         } catch (err) {
             console.error("Translation failed for line:", line, err);
         }
+    }
+}
+
+async function languageOptions() {
+    try {
+        const response = await fetch('js/languages.json');
+        const languages = await response.json();
+
+        const fromLang = document.getElementById('fromLang');
+        const toLang = document.getElementById('toLang');
+
+        for (const [code, name] of Object.entries(languages)) {
+            const fromOption = document.createElement('option');
+            fromOption.value = code;
+            fromOption.textContent = name;
+            fromLang.appendChild(fromOption);
+
+            const toOption = document.createElement('option');
+            toOption.value = code;
+            toOption.textContent = name;
+            toLang.appendChild(toOption);
+        }
+    } catch (error) {
+        console.error('Failed to load languages:', error);
     }
 }

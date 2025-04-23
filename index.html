@@ -16,16 +16,15 @@
                 <button onclick="displaySongInfo()">Search</button>
             </div>
             <div class="langSelection">
-                <span>Source:</span>
-                <select id="sourceLang">
+                <span>From:</span>
+                <select id="fromLang">
                     <option value="auto">Auto Detect</option>
-                    <!-- language options -->
                 </select>
-                <span>Target:</span>
-                <select id="targetLang">
+                <span>To:</span>
+                <select id="toLang">
                     <option value="auto">Auto Detect</option>
-                    <!-- language options -->
                 </select>
+                <script>languageOptions()</script>
             </div>
         </div>
     </header>
