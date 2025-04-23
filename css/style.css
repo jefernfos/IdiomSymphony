@@ -9,6 +9,7 @@ body, input, button, select {
 body {
     background-color: #f7f7f7;
     font-size: 1em;
+    margin: 0;
 }
 
 h1 {
@@ -99,4 +100,22 @@ a {
 
 .player svg:hover {
     filter: drop-shadow(0 0 3px #7f7f7f);
+}
+
+.github {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 8px;
+    display: flex;
+}
+
+.github a {
+    display: inline-flex;
+}
+
+.github svg {
+    height: 20px;
+    width: 20px;
+    fill: #ffffff;
 }
