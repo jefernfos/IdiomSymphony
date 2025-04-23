@@ -1,4 +1,6 @@
-async function translate(text, fromLang = 'auto', toLang = 'auto') {
+let abortPreviousLyrics;
+
+async function translate(text, fromLang = 'auto', toLang = 'auto', signal) {
     if (toLang === 'auto') {
         toLang = navigator.language;
     }
@@ -7,11 +9,14 @@ async function translate(text, fromLang = 'auto', toLang = 'auto') {
     const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${fromLang}&tl=${toLang}&dt=t&q=${query}`;
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, { signal });
         const data = await response.json();
         const translation = data[0].map(item => item[0]).join('');
         return translation;
     } catch (err) {
+        if (err.name === "AbortError") {
+            throw err;
+        }
         console.error('Translation failed:', err);
     }
 }
@@ -53,6 +58,13 @@ async function displaySongInfo() {
     const fromLang = document.getElementById("fromLang").value;
     const toLang = document.getElementById("toLang").value;
 
+    if (abortPreviousLyrics) {
+        abortPreviousLyrics.abort();
+    }
+
+    abortPreviousLyrics = new AbortController();
+    const signal = abortPreviousLyrics.signal;
+
     lyrics.textContent = "";
 
     const data = await searchSongInfo();
@@ -70,11 +82,11 @@ async function displaySongInfo() {
     const lines = data.lyrics.split("\n");
 
     for (const line of lines) {
-        if (line.trim() === ""){
+        if (line.trim() === "") {
             const emptyLine = document.createElement("br");
             lyrics.appendChild(emptyLine);
             continue;
-        };
+        }
 
         const originalLine = document.createElement("p");
         originalLine.textContent = line;
@@ -82,12 +94,16 @@ async function displaySongInfo() {
         lyrics.appendChild(originalLine);
 
         try {
-            const translation = await translate(line, fromLang, toLang);
+            const translation = await translate(line, fromLang, toLang, signal);
             const translatedLine = document.createElement("p");
             translatedLine.textContent = translation;
             translatedLine.classList.add("translation");
             lyrics.appendChild(translatedLine);
         } catch (err) {
+            if (err.name === "AbortError") {
+                console.log("Translation aborted for line:", line);
+                return;
+            }
             console.error("Translation failed for line:", line, err);
         }
     }
