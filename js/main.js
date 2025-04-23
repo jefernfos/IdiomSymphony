@@ -132,3 +132,13 @@ async function languageOptions() {
         console.error('Failed to load languages:', error);
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    languageOptions();
+
+    document.getElementById("song").addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            displaySongInfo();
+        }
+    });
+});
